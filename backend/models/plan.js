@@ -5,11 +5,20 @@ const planSchema = new mongoose.Schema({
   years: [
     [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Session'
+        type: sessionSchema,
       }
     ]
   ]
 })
 
-export default planSchema
+const sessionSchema = new mongoose.Schema({
+  name: String,
+  courses: [
+    {
+      name: String,
+      units: Number
+    }
+  ],
+})
+
+module.exports = mongoose.model('Plan', planSchema)

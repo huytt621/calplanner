@@ -1,9 +1,10 @@
 {
-  years: [
-    sessions: [
+  "user": <insertUserId>,
+  "years": [
+    "sessions": [
       {
-        name: "Fall 2020",
-        courses: [
+        "name": "Fall 2020",
+        "courses": [
           {
             "name": "CS 61A",
             "units": "4"
@@ -19,12 +20,12 @@
           {
             "name": "ESPM 50AC",
             "units": "4"
-          },
+          }
         ]
-      }
+      },
       {
-        name: "Spring 2021",
-        courses: [
+        "name": "Spring 2021",
+        "courses": [
           {
             "name": "CS 61B",
             "units": "4"
@@ -40,12 +41,12 @@
           {
             "name": "PSYCH C126",
             "units": "3"
-          },
+          }
         ]
-      }
+      },
       {
-        name: "Summer 2021",
-        courses: [
+        "name": "Summer 2021",
+        "courses": [
           {
             "name": "DATA C8",
             "units": "4"
@@ -53,7 +54,7 @@
           {
             "name": "CS W169A",
             "units": "3"
-          },
+          }
         ]
       }
     ]
