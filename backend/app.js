@@ -2,6 +2,7 @@ const config = require('./utils/config')
 const express = require('express')
 const app = express()
 const userRouter = require('./controllers/users')
+const loginRouter = require('./controllers/login')
 const logger = require('./utils/logger')
 const mongoose = require('mongoose')
 
@@ -18,6 +19,7 @@ mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology
 app.use(express.json())
 
 app.use('/api/users', userRouter)
+app.use('/api/login', loginRouter)
 
 module.exports = app
 
