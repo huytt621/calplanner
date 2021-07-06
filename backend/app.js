@@ -5,6 +5,7 @@ const userRouter = require('./controllers/users')
 const loginRouter = require('./controllers/login')
 const planRouter = require('./controllers/plans')
 const logger = require('./utils/logger')
+const middleware = require('./utils/middleware')
 const mongoose = require('mongoose')
 
 logger.info('connecting to', config.MONGODB_URI)
@@ -22,6 +23,9 @@ app.use(express.json())
 app.use('/api/users', userRouter)
 app.use('/api/login', loginRouter)
 app.use('/api/plan', planRouter)
+
+app.use(middleware.unknownEndpoint)
+app.use(middleware.errorHandler)
 
 module.exports = app
 
