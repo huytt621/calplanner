@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const userRouter = require('./controllers/users')
 const loginRouter = require('./controllers/login')
+const planRouter = require('./controllers/plans')
 const logger = require('./utils/logger')
 const mongoose = require('mongoose')
 
@@ -20,6 +21,7 @@ app.use(express.json())
 
 app.use('/api/users', userRouter)
 app.use('/api/login', loginRouter)
+app.use('/api/plan', planRouter)
 
 module.exports = app
 

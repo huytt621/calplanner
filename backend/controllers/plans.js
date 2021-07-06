@@ -6,6 +6,22 @@ plansRouter.get('/', async (request, response) => {
   response.json(plans)
 })
 
+plansRouter.post('/', async (request, response) => {
+  const body = request.body
+
+  if (body === undefined) {
+    return response.status(400).json({ error: 'content missing' })
+  }
+
+  const plan = new Plan({
+    ...body,
+    date: new Date(),
+  })
+
+  const savedPlan = plan.save()
+  response.json(savedPlan)
+})
+
 plansRouter.get('/:id', async (request, response) => {
   const plan = await Plan.findById(request.params.id)
   if (plan) {
@@ -14,3 +30,5 @@ plansRouter.get('/:id', async (request, response) => {
     response.status(404).end()
   }
 })
+
+module.exports = plansRouter

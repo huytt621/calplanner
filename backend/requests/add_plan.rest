@@ -1,3 +1,6 @@
+POST http://localhost:3001/api/plan
+Content-Type: application/json
+
 {
   "user": "60e1129f3885d386846f47c6",
   "years": [
@@ -60,4 +63,3 @@
     ]
   ]
 }
-    
