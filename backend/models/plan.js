@@ -11,6 +11,7 @@ const sessionSchema = new mongoose.Schema({
 })
 
 const planSchema = new mongoose.Schema({
+  user: String,
   name: String,
   years: [
     [

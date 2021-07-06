@@ -31,4 +31,21 @@ plansRouter.get('/:id', async (request, response) => {
   }
 })
 
+plansRouter.delete('/:id', async (request, response) => {
+  await Plan.findByIdAndRemove(request.params.id)
+  response.status(204).end()
+})
+
+plansRouter.put('/:id', async (request, response) => {
+  const body = request.body
+
+  const newPlan = {
+    ...body,
+    date: new Date()
+  }
+
+  const updatedPlan = await Plan.findByIdAndUpdate(request.params.id, newPlan, { new: true })
+  response.json(updatedPlan)
+})
+
 module.exports = plansRouter
