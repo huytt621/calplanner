@@ -10,6 +10,15 @@ const sessionSchema = new mongoose.Schema({
   ],
 })
 
+sessionSchema.set('toJSON', {
+    transform: (document, returnedObject) => {
+      delete returnedObject._id
+      returnedObject.courses.forEach(course => {
+        delete course._id
+      })
+    }
+})
+
 const planSchema = new mongoose.Schema({
   user: String,
   name: String,
@@ -21,6 +30,13 @@ const planSchema = new mongoose.Schema({
     ]
   ],
   date: Date,
+})
+
+planSchema.set('toJSON', {
+    transform: (document, returnedObject) => {
+      returnedObject.id = returnedObject._id.toString()
+      delete returnedObject._id
+    }
 })
 
 module.exports = mongoose.model('Plan', planSchema)
