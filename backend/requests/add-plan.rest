@@ -2,7 +2,8 @@ POST http://localhost:3001/api/plan
 Content-Type: application/json
 
 {
-  "user": "60e1129f3885d386846f47c6",
+  "name": "CS Intended Plan",
+  "userId": "60e1129f3885d386846f47c6",
   "years": [
     [
       {

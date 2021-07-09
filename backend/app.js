@@ -22,7 +22,7 @@ app.use(express.json())
 
 app.use('/api/users', userRouter)
 app.use('/api/login', loginRouter)
-app.use('/api/plan', planRouter)
+app.use('/api/plans', planRouter)
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)

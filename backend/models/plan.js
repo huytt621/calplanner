@@ -19,7 +19,8 @@ const planSchema = new mongoose.Schema({
         type: sessionSchema,
       }
     ]
-  ]
+  ],
+  date: Date,
 })
 
 module.exports = mongoose.model('Plan', planSchema)

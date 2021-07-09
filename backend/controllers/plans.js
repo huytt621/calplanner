@@ -1,5 +1,6 @@
 const plansRouter = require('express').Router()
 const Plan = require('../models/plan')
+const User = require('../models/user')
 
 plansRouter.get('/', async (request, response) => {
   const plans = await Plan.find({})
@@ -13,12 +14,23 @@ plansRouter.post('/', async (request, response) => {
     return response.status(400).json({ error: 'content missing' })
   }
 
+  const user = await User.findById(body.userId)
+
+  if (user === null) {
+    return response.status(400).json({ error: 'user not found' })
+  }
+
   const plan = new Plan({
-    ...body,
+    name: body.name,
+    years: body.years,
     date: new Date(),
+    user: user._id
   })
 
-  const savedPlan = plan.save()
+  const savedPlan = await plan.save()
+  user.plans = user.plans.concat(savedPlan._id)
+  await user.save()
+
   response.json(savedPlan)
 })
 
