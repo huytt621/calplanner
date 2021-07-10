@@ -1,6 +1,6 @@
-PUT http://localhost:3001/api/plans/60e9109e5c5ea48d6eb8dc89
+PUT http://localhost:3001/api/plans/60e91a400adb5b4d45213868
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOiI2MGU5MGYzMjhlNjRhNjZiMTY4MWEzMzkiLCJpYXQiOjE2MjU4ODgxMzh9.W7geOwlCJvyyqoYJhmZ3zZFfTwUw8zc6-ebOrr4NvOE
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOiI2MGU5MWExOTBhZGI1YjRkNDUyMTM4NjIiLCJpYXQiOjE2MjU4ODkzMjV9.g8k1hmjjy5qzPYyNuMChOdhU5JPpx_T2cXHKzIEGQds
 
 {
   "user": "60e90f328e64a66b1681a339",
