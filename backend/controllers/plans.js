@@ -1,20 +1,20 @@
 const plansRouter = require('express').Router()
 const Plan = require('../models/plan')
-const User = require('../models/user')
+const middleware = require('../utils/middleware')
 
 plansRouter.get('/', async (request, response) => {
   const plans = await Plan.find({})
   response.json(plans)
 })
 
-plansRouter.post('/', async (request, response) => {
+plansRouter.post('/', middleware.userExtractor, async (request, response) => {
   const body = request.body
 
   if (body === undefined) {
     return response.status(400).json({ error: 'content missing' })
   }
 
-  const user = await User.findById(body.userId)
+  const user = request.user
 
   if (user === null) {
     return response.status(400).json({ error: 'user not found' })
@@ -43,12 +43,24 @@ plansRouter.get('/:id', async (request, response) => {
   }
 })
 
-plansRouter.delete('/:id', async (request, response) => {
+plansRouter.delete('/:id', middleware.userExtractor, async (request, response) => {
+  const plan = await Plan.findById(request.params.id)
+  if (!request.token || plan.user.toString() !== request.user._id.toString()) {
+    response.status(400).json({ error: 'token missing or invalid user' })
+  }
+  const user = request.user
+  user.plans = user.plans.filter(p => p.toString() === request.params.id)
   await Plan.findByIdAndRemove(request.params.id)
+  await user.save()
+
   response.status(204).end()
 })
 
-plansRouter.put('/:id', async (request, response) => {
+plansRouter.put('/:id', middleware.userExtractor, async (request, response) => {
+  const plan = await Plan.findById(request.params.id)
+  if (!request.token || plan.user.toString() !== request.user._id.toString()) {
+    response.status(400).json({ error: 'token missing or invalid user' })
+  }
   const body = request.body
 
   const newPlan = {

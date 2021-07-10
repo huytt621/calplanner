@@ -1,5 +1,6 @@
 const config = require('./utils/config')
 const express = require('express')
+require('express-async-errors')
 const app = express()
 const userRouter = require('./controllers/users')
 const loginRouter = require('./controllers/login')
@@ -22,7 +23,7 @@ app.use(express.json())
 
 app.use('/api/users', userRouter)
 app.use('/api/login', loginRouter)
-app.use('/api/plans', planRouter)
+app.use('/api/plans', middleware.tokenExtractor, planRouter)
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)

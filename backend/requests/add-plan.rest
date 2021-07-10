@@ -1,9 +1,10 @@
-POST http://localhost:3001/api/plan
+POST http://localhost:3001/api/plans
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOiI2MGU5MTZjYzcwMGM4ODEzMGM1YjIwMzAiLCJpYXQiOjE2MjU4ODg0ODF9.x0G8Sz2d_jlVW_BR9enOiZl_07kk0-K5Cj_vYKrpjeU
 
 {
   "name": "CS Intended Plan",
-  "userId": "60e1129f3885d386846f47c6",
+  "userId": "60e90f328e64a66b1681a339",
   "years": [
     [
       {
