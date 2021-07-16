@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 const NavBar = () => {
   return (
-    <nav>
+    <nav className="bg-gray-800">
       <h1>CalPlanner</h1>
       <ul>
         <li>
