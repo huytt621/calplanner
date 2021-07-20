@@ -1,6 +1,6 @@
 import loginService from '../services/login'
 
-const LoginForm = ({ username, setUsername, password, setPassword }) => {
+const LoginForm = ({ username, setUsername, password, setPassword, setUser }) => {
   const handleLogin = async (event) => {
     event.preventDefault()
     try {
@@ -9,6 +9,7 @@ const LoginForm = ({ username, setUsername, password, setPassword }) => {
       })
       setUsername('')
       setPassword('')
+      setUser(user)
     } catch (exception) {
       console.log(exception);
     }
@@ -19,10 +20,9 @@ const LoginForm = ({ username, setUsername, password, setPassword }) => {
       <div>
         Username:
         <input type="text" value={username} name="Username" onChange={({ target }) => setUsername(target.value)}/>
-      </div>
-      <div>
         Password:
         <input type="password" value={password} name="Password" onChange={({ target }) => setPassword(target.value)}/>
+        <button type="submit">Submit</button>
       </div>
     </form>
   )

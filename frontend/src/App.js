@@ -5,6 +5,7 @@ import {
 } from "react-router-dom" 
 import NavBar from './components/NavBar'
 import LoginForm from './components/LoginForm'
+import RegisterForm from './components/RegisterForm'
 
 const App = () => {
   const [username, setUsername] = useState('')
@@ -17,8 +18,8 @@ const App = () => {
         <NavBar />
         <Switch>
           <Route path="/login">
-            <LoginForm username={username} setUsername={setUsername} password={password} setPassword={setPassword} />
-          </Route>
+            <LoginForm username={username} setUsername={setUsername} password={password} setPassword={setPassword} setUser={setUser} />
+          </Route> 
         </Switch>
       </Router>
     </div>
