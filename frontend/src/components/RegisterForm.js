@@ -1,7 +1,9 @@
 import userService from '../services/user'
 import { useState } from 'react'
 
-const RegisterForm = ({ username, setUsername, password, setPassword, setUser }) => {
+const RegisterForm = ({ setUser }) => {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
 
   const handleRegister = async (event) => {
@@ -15,6 +17,9 @@ const RegisterForm = ({ username, setUsername, password, setPassword, setUser })
       const user = await userService.create({
         username, password
       })
+      setUsername('')
+      setPassword('')
+      setConfirmPassword('')
       setUser(user)
       // redirect to home screen
     } catch (exception) {

@@ -1,25 +1,31 @@
-import { useState } from 'react'
 import {
   BrowserRouter as Router,
   Switch, Route
 } from "react-router-dom" 
+import { useState } from 'react'
 import NavBar from './components/NavBar'
 import LoginForm from './components/LoginForm'
 import RegisterForm from './components/RegisterForm'
+import Home from './components/Home'
+import './index.css'
 
 const App = () => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
 
   return (
-    <div className="App">
+    <div className="App ">
       <Router>
         <NavBar />
         <Switch>
           <Route path="/login">
-            <LoginForm username={username} setUsername={setUsername} password={password} setPassword={setPassword} setUser={setUser} />
-          </Route> 
+            <LoginForm setUser={setUser} />
+          </Route>
+          <Route path="/register">
+            <RegisterForm setUser={setUser} />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
         </Switch>
       </Router>
     </div>
