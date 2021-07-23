@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-const NavBar = () => {
+const NavBar = ({ user }) => {
   return (
     <nav>
       <ul>
@@ -16,13 +16,12 @@ const NavBar = () => {
         <li>
           <Link to="/register">Register</Link>
         </li>
+        <li>
+          <div>{user ? user.username : ''}</div>
+        </li>
       </ul>
     </nav>
   )
-}
-
-const Button = () => {
-
 }
 
 export default NavBar

@@ -1,10 +1,12 @@
 import userService from '../services/user'
 import { useState } from 'react'
+import { useHistory } from 'react-router'
 
 const RegisterForm = ({ setUser }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const history = useHistory()
 
   const handleRegister = async (event) => {
     event.preventDefault()
@@ -21,7 +23,7 @@ const RegisterForm = ({ setUser }) => {
       setPassword('')
       setConfirmPassword('')
       setUser(user)
-      // redirect to home screen
+      history.push('/')
     } catch (exception) {
       console.log(exception);
     }

@@ -3,31 +3,30 @@ import {
   Switch, Route
 } from "react-router-dom" 
 import { useState, useEffect } from 'react'
+import planService from './services/plans'
 import NavBar from './components/NavBar'
 import LoginForm from './components/LoginForm'
 import RegisterForm from './components/RegisterForm'
 import Home from './components/Home'
 import './index.css'
 
-import axios from 'axios'
-import Plan from './components/Plan'
-
 const App = () => {
   const [user, setUser] = useState(null)
   const [plan, setPlan] = useState(null)
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/plans')
-      .then(response => {
-        setPlan(response.data[0])
-      })
+    const loggedUserJSON = window.localStorage.getItem('loggedPlanappUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      planService.setToken(user.token)
+    }
   }, [])
 
   return (
     <div className="App ">
       <Router>
-        <NavBar />
+        <NavBar user={user} />
         <Switch>
           <Route path="/login">
             <LoginForm setUser={setUser} />
@@ -40,7 +39,6 @@ const App = () => {
           </Route>
         </Switch>
       </Router>
-      { plan ?<Plan plan={plan} /> : <div></div> }
     </div>
   )
 }

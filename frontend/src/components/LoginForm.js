@@ -1,9 +1,12 @@
 import { useState } from 'react'
+import { useHistory } from 'react-router'
 import loginService from '../services/login'
+import planService from '../services/plans'
 
 const LoginForm = ({ setUser }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const history = useHistory()
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -11,9 +14,14 @@ const LoginForm = ({ setUser }) => {
       const user = await loginService.login({
         username, password
       })
+      window.localStorage.setItem(
+        'loggedPlanappUser', JSON.stringify(user)
+      )
+      planService.setToken(user.token)
       setUsername('')
       setPassword('')
       setUser(user)
+      history.push('/')
     } catch (exception) {
       console.log(exception);
     }
