@@ -1,23 +1,27 @@
 import { Link } from "react-router-dom"
 
-const NavBar = () => {
+const NavBar = ({ user }) => {
   return (
-    <nav className="bg-gray-800">
-      <h1>CalPlanner</h1>
+    <nav>
       <ul>
+        <li>
+          <Link to="/">CalPlanner</Link>
+        </li>
         <li>
           <Link to="/plans">Plans</Link>
         </li>
         <li>
           <Link to="/login">Login</Link>
         </li>
+        <li>
+          <Link to="/register">Register</Link>
+        </li>
+        <li>
+          <div>{user ? user.username : ''}</div>
+        </li>
       </ul>
     </nav>
   )
-}
-
-const Button = () => {
-
 }
 
 export default NavBar
