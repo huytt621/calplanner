@@ -35,7 +35,7 @@ const App = () => {
             <RegisterForm setUser={setUser} />
           </Route>
           <Route path="/">
-            <Home />
+            <Home user={user} />
           </Route>
         </Switch>
       </Router>
