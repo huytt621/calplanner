@@ -28,13 +28,11 @@ const LoginForm = ({ setUser }) => {
   }
 
   return (
-    <form onSubmit={handleLogin}>
-      <div>
-        Username:
-        <input type="text" value={username} name="Username" onChange={({ target }) => setUsername(target.value)}/>
-        Password:
-        <input type="password" value={password} name="Password" onChange={({ target }) => setPassword(target.value)}/>
-        <button type="submit">Submit</button>
+    <form onSubmit={handleLogin} className="border w-30">
+      <div className="flex flex-col">
+        <input className="border p-3 m-2" type="text" value={username} placeholder="Enter your username" name="Username" onChange={({ target }) => setUsername(target.value)}/>
+        <input className="border p-3 m-2" type="password" value={password} placeholder="Enter your password" name="Password" onChange={({ target }) => setPassword(target.value)}/>
+        <button type="submit">Log In</button>
       </div>
     </form>
   )
