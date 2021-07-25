@@ -8,16 +8,16 @@ const NavBar = ({ user }) => {
           <Link to="/" className="text-3xl p-2 ml-4">CalPlanner</Link>
         </li>
         <div className="flex flex-row">
-          <li className="p-2">
+          <li className="p-2 bg-berkeley-blue hover:bg-blue-800">
             <Link to="/plans">Plans</Link>
           </li>
-          <li className="p-2">
+          <li className="p-2 bg-berkeley-blue hover:bg-blue-800">
             <Link to="/login">Login</Link>
           </li>
-          <li className="p-2">
+          <li className="p-2 bg-berkeley-blue hover:bg-blue-800">
             <Link to="/register">Register</Link>
           </li>
-          <li className="p-2 mr-4">
+          <li className="p-2 mr-4 bg-berkeley-blue hover:bg-blue-800">
             <div>{user ? user.username : ''}</div>
           </li>
         </div>
