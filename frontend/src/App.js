@@ -8,8 +8,12 @@ import NavBar from './components/NavBar'
 import LoginForm from './components/LoginForm'
 import RegisterForm from './components/RegisterForm'
 import Home from './components/Home'
+import Profile from './components/Profile'
 import './index.css'
 
+
+import axios from 'axios'
+import Plan from './components/Plan'
 const App = () => {
   const [user, setUser] = useState(null)
   const [plan, setPlan] = useState(null)
@@ -24,7 +28,7 @@ const App = () => {
   }, [])
 
   return (
-    <div className="App font-sans">
+    <div className="App font-sans flex flex-col">
       <Router>
         <NavBar user={user} />
         <Switch>
