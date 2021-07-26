@@ -24,7 +24,7 @@ const App = () => {
   }, [])
 
   return (
-    <div className="App ">
+    <div className="App font-sans">
       <Router>
         <NavBar user={user} />
         <Switch>
