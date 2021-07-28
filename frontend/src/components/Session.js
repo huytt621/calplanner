@@ -2,10 +2,11 @@ import Course from './Course'
 
 const Session = ({ session }) => {
   return (
-    <table>
+    <table className="m-5">
       <thead>
         <tr>
-          <th colspan="2">{session.name}</th>
+          <th>{session.name}</th>
+          <th>Units</th>
         </tr>
       </thead>
       <tbody>

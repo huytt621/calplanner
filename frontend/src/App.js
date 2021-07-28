@@ -19,6 +19,14 @@ const App = () => {
   const [plan, setPlan] = useState(null)
 
   useEffect(() => {
+    axios
+      .get('http://localhost:3001/plans')
+      .then(response => {
+        setPlan(response.data[0])
+      })
+  }, [])
+
+  useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedPlanappUser')
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
@@ -32,6 +40,9 @@ const App = () => {
       <Router>
         <NavBar user={user} />
         <Switch>
+          <Route path="/plans">
+            <Plan plan={plan} />
+          </Route>
           <Route path="/login">
             <LoginForm setUser={setUser} />
           </Route>

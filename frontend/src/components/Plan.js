@@ -2,7 +2,7 @@ import Year from './Year'
 
 const Plan = ({ plan }) => {
   return (
-    <div>
+    <div className="flex flex-col">
       {plan.years.map(year => <Year year={year} />)}
     </div>
   )

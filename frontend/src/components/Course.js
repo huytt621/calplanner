@@ -1,7 +1,7 @@
 const Course = ({ course }) => (
   <tr>
-    <td>{course.name}</td>
-    <td>{course.units}</td>
+    <td className="p-2">{course.name}</td>
+    <td className="p-2">{course.units}</td>
   </tr>
 )
 
