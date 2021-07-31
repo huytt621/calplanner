@@ -8,7 +8,6 @@ import NavBar from './components/NavBar'
 import LoginForm from './components/LoginForm'
 import RegisterForm from './components/RegisterForm'
 import Home from './components/Home'
-import Profile from './components/Profile'
 import './index.css'
 
 
@@ -20,9 +19,9 @@ const App = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:3001/plans')
+      .get('http://localhost:3001/api/plans/6104b8837af9231e09e29b06')
       .then(response => {
-        setPlan(response.data[0])
+        setPlan(response.data)
       })
   }, [])
 
@@ -35,13 +34,17 @@ const App = () => {
     }
   }, [])
 
+  useEffect(() => {
+    planService.update("6104b8837af9231e09e29b06", plan)
+  }, [plan])
+
   return (
     <div className="App font-sans flex flex-col">
       <Router>
         <NavBar user={user} />
         <Switch>
           <Route path="/plans">
-            <Plan plan={plan} />
+            <Plan plan={plan} setPlan={setPlan} />
           </Route>
           <Route path="/login">
             <LoginForm setUser={setUser} />

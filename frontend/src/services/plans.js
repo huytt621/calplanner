@@ -24,7 +24,10 @@ const create = async newPlan => {
 }
 
 const update = async (id, updatedPlan) => {
-  const response = await axios.put(`${baseUrl}/${id}`, updatedPlan)
+  const config = {
+    headers: { Authorization: token },
+  }
+  const response = await axios.put(`${baseUrl}/${id}`, updatedPlan, config)
   return response.data
 }
 
