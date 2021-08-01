@@ -7,7 +7,6 @@ const Session = ({ columns, data, year, sessionIndex, setPlan, plan }) => {
     const newSession = newPlan.years[year][sessionIndex]
     const editedCourse = newSession.courses[rowIndex]
     editedCourse[columnId] = value
-    console.log(newPlan);
     setPlan(newPlan)
   }
 
@@ -48,6 +47,10 @@ const Session = ({ columns, data, year, sessionIndex, setPlan, plan }) => {
               </tr>
             )
           })}
+          <tr>
+            <td>Total Units</td>
+            <td>{data.reduce((totalUnits, course) => totalUnits + Number(course.units), 0)}</td>
+          </tr>
         </tbody>
       </table>
     </div>
