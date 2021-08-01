@@ -12,7 +12,7 @@ const EditableCell = ({
     setValue(initialValue)
   }, [initialValue])
 
-  return <input value={value} onChange={e => { setValue(e.target.value); updateMyData(index, id, e.target.value)}} />
+  return <input value={value} onChange={e => setValue(e.target.value)} onBlur={e => updateMyData(index, id, e.target.value)} />
 }
 
 export default EditableCell
