@@ -1,9 +1,9 @@
 import Year from './Year'
 
-const Plan = ({ plan }) => {
+const Plan = ({ plan, setPlan }) => {
   return (
-    <div>
-      {plan.years.map(year => <Year year={year} />)}
+    <div className="flex flex-col">
+      {plan.years.map((year, index) => <Year year={year} yearIndex={index} plan={plan} setPlan={setPlan} />)}
     </div>
   )
 }

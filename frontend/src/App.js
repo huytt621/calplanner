@@ -10,9 +10,20 @@ import RegisterForm from './components/RegisterForm'
 import Home from './components/Home'
 import './index.css'
 
+
+import axios from 'axios'
+import Plan from './components/Plan'
 const App = () => {
   const [user, setUser] = useState(null)
   const [plan, setPlan] = useState(null)
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/api/plans/6104b8837af9231e09e29b06')
+      .then(response => {
+        setPlan(response.data)
+      })
+  }, [])
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedPlanappUser')
@@ -23,11 +34,18 @@ const App = () => {
     }
   }, [])
 
+  useEffect(() => {
+    planService.update("6104b8837af9231e09e29b06", plan)
+  }, [plan])
+
   return (
-    <div className="App font-sans">
+    <div className="App font-sans flex flex-col">
       <Router>
         <NavBar user={user} />
         <Switch>
+          <Route path="/plans">
+            <Plan plan={plan} setPlan={setPlan} />
+          </Route>
           <Route path="/login">
             <LoginForm setUser={setUser} />
           </Route>
