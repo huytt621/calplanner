@@ -24,7 +24,7 @@ const Home = ( {user} ) => {
 			  		Dicussion Among Students
 			  	</div>
 			  	<div className="rounded-full border-solid bg-blue-400 w-9/12 h-8">
-			  		Popularity and Difficulty Meter 
+			  		Popularity and Diffic ulty Meter 
 			  	</div>
 		  	</div>
 		</div>
