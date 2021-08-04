@@ -10,6 +10,14 @@ const Session = ({ columns, data, year, sessionIndex, setPlan, plan }) => {
     setPlan(newPlan)
   }
 
+  const addCourse = () => {
+    const newPlan = {...plan}
+    const newSession = newPlan.years[year][sessionIndex]
+    const newCourse = {name: '', units: ''}
+    newSession.courses.push(newCourse)
+    setPlan(newPlan)
+  }
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -47,6 +55,11 @@ const Session = ({ columns, data, year, sessionIndex, setPlan, plan }) => {
               </tr>
             )
           })}
+          <tr>
+            <th colSpan="2">
+              <button className="w-full" onClick={addCourse}>+</button>
+            </th>
+          </tr>
           <tr>
             <td>Total Units</td>
             <td>{data.reduce((totalUnits, course) => totalUnits + Number(course.units), 0)}</td>

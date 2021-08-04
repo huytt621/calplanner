@@ -15,7 +15,7 @@ import axios from 'axios'
 import Plan from './components/Plan'
 const App = () => {
   const [user, setUser] = useState(null)
-  const [plan, setPlan] = useState(null)
+  const [plan, setPlan] = useState({years: []})
 
   useEffect(() => {
     axios

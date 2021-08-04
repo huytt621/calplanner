@@ -16,7 +16,7 @@ const Year = ({ year, yearIndex, plan, setPlan }) => {
   ]
   return (
     <div className="flex flex-row">
-      {year.map((session, index) => <Session columns={[{ Header: session.name, columns: columns }]} data={session.courses} year={yearIndex} sessionIndex={index} plan={plan} setPlan={setPlan} />)}
+      {year.map((session, index) => <Session key={session.name} columns={[{ Header: session.name, columns: columns }]} data={session.courses} year={yearIndex} sessionIndex={index} plan={plan} setPlan={setPlan} />)}
     </div>
   )
 }
