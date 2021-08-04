@@ -18,6 +18,13 @@ const Session = ({ columns, data, year, sessionIndex, setPlan, plan }) => {
     setPlan(newPlan)
   }
 
+  const removeCourse = (rowIndex) => {
+    const newPlan = {...plan}
+    const newSession = newPlan.years[year][sessionIndex]
+    newSession.courses.splice(rowIndex, 1)
+    setPlan(newPlan)
+  }
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -52,6 +59,7 @@ const Session = ({ columns, data, year, sessionIndex, setPlan, plan }) => {
                     <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   )
                 })}
+                <td><button onClick={() => removeCourse(i)}>Delete</button></td>
               </tr>
             )
           })}
