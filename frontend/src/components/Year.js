@@ -1,7 +1,7 @@
 import EditableCell from './EditableCell'
 import Session from './Session'
 
-const Year = ({ year, yearIndex, plan, setPlan }) => {
+const Year = ({ year, yearIndex, plan, editPlan }) => {
   const columns = [
     {
       Header: 'Course Name',
@@ -16,15 +16,15 @@ const Year = ({ year, yearIndex, plan, setPlan }) => {
   ]
 
   const deleteYear = () => {
-    const newPlan = {...plan}
-    newPlan.years.splice(yearIndex, 1)
-    setPlan(newPlan)
+    editPlan((newPlan) => {
+      newPlan.years.splice(yearIndex, 1)
+    })
   }
 
   return (
     <div className="flex flex-row">
       <button onClick={deleteYear}>Delete</button>
-      {year.map((session, index) => <Session key={session.name} columns={[{ Header: session.name, columns: columns }]} data={session.courses} year={yearIndex} sessionIndex={index} plan={plan} setPlan={setPlan} />)}
+      {year.map((session, index) => <Session key={session.name} columns={[{ Header: session.name, columns: columns }]} data={session.courses} year={yearIndex} sessionIndex={index} plan={plan} editPlan={editPlan} />)}
     </div>
   )
 }

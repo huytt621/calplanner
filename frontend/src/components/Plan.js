@@ -1,18 +1,17 @@
 import Year from './Year'
 
-const Plan = ({ plan, setPlan }) => {
+const Plan = ({ plan, editPlan }) => {
   const addYear = () => {
-    const newPlan = {...plan}
-    const newYear = [{name: 'Fall 2021', courses: []}, {name: 'Spring 2022', courses: []}, {name: 'Summer 2022', courses: []}]
-    newPlan.years.push(newYear)
-    console.log(newPlan);
-    setPlan(newPlan)
+    editPlan((newPlan) => {
+      const newYear = [{name: 'Fall 2021', courses: []}, {name: 'Spring 2022', courses: []}, {name: 'Summer 2022', courses: []}]
+      newPlan.years.push(newYear)
+    })
   }
 
   return (
     <div className="flex flex-col">
       <div>
-        {plan.years.map((year, index) => <Year key={''} year={year} yearIndex={index} plan={plan} setPlan={setPlan} />)}
+        {plan.years.map((year, index) => <Year key={''} year={year} yearIndex={index} plan={plan} editPlan={editPlan} />)}
       </div>
       <button onClick={addYear}>Add New Year</button>
     </div>

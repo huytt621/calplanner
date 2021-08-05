@@ -38,13 +38,19 @@ const App = () => {
     planService.update("6104b8837af9231e09e29b06", plan)
   }, [plan])
 
+  const editPlan = action => {
+    const newPlan = {...plan}
+    action(newPlan)
+    setPlan(newPlan)
+  }
+
   return (
     <div className="App font-sans flex flex-col">
       <Router>
         <NavBar user={user} />
         <Switch>
           <Route path="/plans">
-            <Plan plan={plan} setPlan={setPlan} />
+            <Plan plan={plan} editPlan={editPlan} />
           </Route>
           <Route path="/login">
             <LoginForm setUser={setUser} />

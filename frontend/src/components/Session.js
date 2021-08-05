@@ -1,29 +1,30 @@
 import { useTable } from 'react-table'
 
-const Session = ({ columns, data, year, sessionIndex, setPlan, plan }) => {
+const Session = ({ columns, data, year, sessionIndex, plan, editPlan }) => {
 
   const updateMyData = (rowIndex, columnId, value) => {
-    const newPlan = {...plan}
-    const newSession = newPlan.years[year][sessionIndex]
-    const editedCourse = newSession.courses[rowIndex]
-    editedCourse[columnId] = value
-    setPlan(newPlan)
+    editPlan((newPlan) => {
+      const newSession = newPlan.years[year][sessionIndex]
+      const editedCourse = newSession.courses[rowIndex]
+      editedCourse[columnId] = value
+    })
   }
 
   const addCourse = () => {
-    const newPlan = {...plan}
-    const newSession = newPlan.years[year][sessionIndex]
-    const newCourse = {name: '', units: ''}
-    newSession.courses.push(newCourse)
-    setPlan(newPlan)
+    editPlan((newPlan) => {
+      const newSession = newPlan.years[year][sessionIndex]
+      const newCourse = {name: '', units: ''}
+      newSession.courses.push(newCourse)
+    })
   }
 
   const removeCourse = (rowIndex) => {
-    const newPlan = {...plan}
-    const newSession = newPlan.years[year][sessionIndex]
-    newSession.courses.splice(rowIndex, 1)
-    setPlan(newPlan)
+    editPlan((newPlan) => {
+      const newSession = newPlan.years[year][sessionIndex]
+      newSession.courses.splice(rowIndex, 1)
+    })
   }
+  
 
   const {
     getTableProps,
