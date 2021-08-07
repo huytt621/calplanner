@@ -3,7 +3,10 @@ import Year from './Year'
 const Plan = ({ plan, editPlan }) => {
   const addYear = () => {
     editPlan((newPlan) => {
-      const newYear = [{name: 'Fall 2021', courses: []}, {name: 'Spring 2022', courses: []}, {name: 'Summer 2022', courses: []}]
+      const newYear = []
+      for (let i = 0; i < plan.numSessionsPerYear; i += 1) {
+        newYear.push({ name: `Session ${i + 1}`, courses: [] })
+      }
       newPlan.years.push(newYear)
     })
   }
