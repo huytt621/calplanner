@@ -2,6 +2,8 @@ const mongoose = require('mongoose')
 
 const sessionSchema = new mongoose.Schema({
   name: String,
+  numSessionsPerYear: Number,
+  description: String,
   courses: [
     {
       name: String,
