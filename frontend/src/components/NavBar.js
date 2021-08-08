@@ -18,7 +18,9 @@ const NavBar = ({ user }) => {
             <Link to="/register">Register</Link>
           </li>
           <li className="p-2 mr-4 bg-berkeley-blue hover:bg-blue-800">
-            {user ? user.username : ''}
+            {user 
+              ? <Link to={`/users/${user.id}`}>{user.username}</Link>
+              : <div></div>}
           </li>
         </div>
       </ul>

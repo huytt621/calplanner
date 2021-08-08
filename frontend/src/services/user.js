@@ -1,6 +1,15 @@
-
 import axios from 'axios'
 const baseUrl = 'http://localhost:3001/api/users'
+
+const getAll = async () => {
+  const response = await axios.get(baseUrl)
+  return response.data
+}
+
+const get = async id => {
+  const response = await axios.get(`${baseUrl}/${id}`)
+  return response.data
+}
 
 const create = async newUser => {
   const response = await axios.post(baseUrl, newUser)
@@ -8,5 +17,7 @@ const create = async newUser => {
 }
 
 export default {
-  create
+  create,
+  getAll,
+  get,
 }
