@@ -10,12 +10,12 @@ import LoginForm from './components/LoginForm'
 import RegisterForm from './components/RegisterForm'
 import Home from './components/Home'
 import Profile from './components/Profile'
+import PlansView from './components/PlansView'
 import './index.css'
 
-
-import Plan from './components/Plan'
 const App = () => {
   const [user, setUser] = useState(null)
+  const [plans, setPlans] = useState([])
   const [plan, setPlan] = useState({years: []})
 
   useEffect(() => {
@@ -30,8 +30,10 @@ const App = () => {
   }, [])
 
   useEffect(() => {
-    planService.update("6104b8837af9231e09e29b06", plan)
-  }, [plan])
+    planService
+      .getAll()
+      .then(plans => setPlans(plans))
+  }, [])
 
   const editPlan = action => {
     const newPlan = {...plan}
@@ -45,7 +47,7 @@ const App = () => {
         <NavBar user={user} />
         <Switch>
           <Route path="/plans">
-            <Plan plan={plan} editPlan={editPlan} />
+            <PlansView plans={plans} />
           </Route>
           <Route path="/login">
             <LoginForm setUser={setUser} />

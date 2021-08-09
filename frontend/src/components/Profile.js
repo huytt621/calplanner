@@ -1,4 +1,4 @@
-import PlanCard from './PlanCard'
+import PlansView from '../components/PlansView'
 import { useState, useEffect } from 'react'
 import planService from '../services/plans'
 
@@ -18,7 +18,7 @@ const Profile = ({ user }) => {
   return (
     <div>
       <h2>My Plans</h2>
-      {plans.map(p => <PlanCard key={user.id + p.name} plan={p} />)}
+      <PlansView plans={plans} />
     </div>
   )
 }
