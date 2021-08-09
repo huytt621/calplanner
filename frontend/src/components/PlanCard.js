@@ -1,9 +1,11 @@
+import { Link } from 'react-router-dom'
+
 const PlanCard = ({ plan }) => {
   return (
-    <div>
+    <Link to={`/plans/${plan.id}`}>
       <h3>{plan.name}</h3>
       <p>{plan.description}</p>
-    </div>
+    </Link>
   )
 }
 

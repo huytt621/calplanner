@@ -1,6 +1,7 @@
 import {
-  BrowserRouter as Router,
-  Switch, Route
+  Switch, 
+  Route,
+  useRouteMatch
 } from "react-router-dom" 
 import { useState, useEffect } from 'react'
 import userService from './services/user'
@@ -11,6 +12,7 @@ import RegisterForm from './components/RegisterForm'
 import Home from './components/Home'
 import Profile from './components/Profile'
 import PlansView from './components/PlansView'
+import Plan from './components/Plan'
 import './index.css'
 
 const App = () => {
@@ -39,30 +41,42 @@ const App = () => {
     const newPlan = {...plan}
     action(newPlan)
     setPlan(newPlan)
+    planService
+      .update(newPlan.id, newPlan)
   }
+
+  const match = useRouteMatch('/plans/:id')
+  useEffect(() => {
+    if (match) {
+      planService
+        .get(match.params.id)
+        .then(plan => setPlan(plan))
+    }
+  }, [match])
 
   return (
     <div className="App font-sans flex flex-col">
-      <Router>
-        <NavBar user={user} />
-        <Switch>
-          <Route path="/plans">
-            <PlansView plans={plans} />
-          </Route>
-          <Route path="/login">
-            <LoginForm setUser={setUser} />
-          </Route>
-          <Route path="/register">
-            <RegisterForm setUser={setUser} />
-          </Route>
-          <Route path="/users/:id">
-            <Profile user={user} />
-          </Route>
-          <Route path="/">
-            <Home user={user} />
-          </Route>
-        </Switch>
-      </Router>
+      <NavBar user={user} />
+      <Switch>
+        <Route path="/plans/:id">
+          <Plan plan={plan} editPlan={editPlan} />
+        </Route>
+        <Route path="/plans">
+          <PlansView plans={plans} />
+        </Route>
+        <Route path="/login">
+          <LoginForm setUser={setUser} />
+        </Route>
+        <Route path="/register">
+          <RegisterForm setUser={setUser} />
+        </Route>
+        <Route path="/users/:id">
+          <Profile user={user} />
+        </Route>
+        <Route path="/">
+          <Home user={user} />
+        </Route>
+      </Switch>
     </div>
   )
 }

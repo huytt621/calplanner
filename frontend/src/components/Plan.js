@@ -32,7 +32,7 @@ const Plan = ({ plan, editPlan }) => {
   return (
     <div className="flex flex-col">
       <div>
-        {plan.years.map((year, index) => <Year key={''} year={year} yearIndex={index} plan={plan} editPlan={editPlan} />)}
+        {plan.years.map((year, index) => <Year key={`${index}`} year={year} yearIndex={index} plan={plan} editPlan={editPlan} />)}
       </div>
       <button onClick={addYear}>Add New Year</button>
       <EditableText text={name} placeholder="Name of Plan">
