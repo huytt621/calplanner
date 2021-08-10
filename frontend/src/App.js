@@ -18,7 +18,6 @@ import './index.css'
 const App = () => {
   const [user, setUser] = useState(null)
   const [plans, setPlans] = useState([])
-  const [plan, setPlan] = useState({years: []})
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedPlanappUser')
@@ -40,19 +39,13 @@ const App = () => {
   const editPlan = action => {
     const newPlan = {...plan}
     action(newPlan)
-    setPlan(newPlan)
     planService
       .update(newPlan.id, newPlan)
+    setPlans(plans.map(p => p.id !== newPlan.id ? p : newPlan))
   }
 
   const match = useRouteMatch('/plans/:id')
-  useEffect(() => {
-    if (match) {
-      planService
-        .get(match.params.id)
-        .then(plan => setPlan(plan))
-    }
-  }, [match])
+  const plan = match ? plans.find(p => p.id === match.params.id) : null
 
   return (
     <div className="App font-sans flex flex-col">
