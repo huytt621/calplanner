@@ -49,7 +49,7 @@ plansRouter.delete('/:id', middleware.userExtractor, async (request, response) =
     response.status(404).end()
   }
   if (!request.token || plan.user.toString() !== request.user._id.toString()) {
-    response.status(400).json({ error: 'token missing or invalid user' })
+    return response.status(400).json({ error: 'token missing or invalid user' })
   }
   const user = request.user
   user.plans = user.plans.filter(p => p.toString() === request.params.id)
@@ -65,7 +65,7 @@ plansRouter.put('/:id', middleware.userExtractor, async (request, response) => {
     response.status(404).end()
   }
   if (!request.token || plan.user.toString() !== request.user._id.toString()) {
-    response.status(400).json({ error: 'token missing or invalid user' })
+    return response.status(400).json({ error: 'token missing or invalid user' })
   }
   const body = request.body
 
