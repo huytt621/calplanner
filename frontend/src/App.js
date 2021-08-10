@@ -17,6 +17,7 @@ import './index.css'
 
 const App = () => {
   const [user, setUser] = useState(null)
+  const [plan, setPlan] = useState(null)
   const [plans, setPlans] = useState([])
 
   useEffect(() => {
@@ -45,14 +46,22 @@ const App = () => {
   }
 
   const match = useRouteMatch('/plans/:id')
-  const plan = match ? plans.find(p => p.id === match.params.id) : null
+  if (!plan && match) {
+    if (plans.length > 0) {
+      setPlan(plans.find(p => p.id === match.params.id))
+    } else {
+      planService
+        .get(match.params.id)
+        .then(p => setPlan(p))
+    }
+  }
 
   return (
     <div className="App font-sans flex flex-col">
       <NavBar user={user} />
       <Switch>
         <Route path="/plans/:id">
-          <Plan plan={plan} editPlan={editPlan} />
+          {!plan ? <div></div> : <Plan plan={plan} editPlan={editPlan} />}
         </Route>
         <Route path="/plans">
           <PlansView plans={plans} />
