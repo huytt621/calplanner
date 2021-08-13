@@ -28,11 +28,14 @@ const LoginForm = ({ setUser }) => {
   }
 
   return (
-    <form onSubmit={handleLogin} className="border w-30">
-      <div className="flex flex-col">
-        <input className="border p-3 m-2" type="text" value={username} placeholder="Enter your username" name="Username" onChange={({ target }) => setUsername(target.value)}/>
-        <input className="border p-3 m-2" type="password" value={password} placeholder="Enter your password" name="Password" onChange={({ target }) => setPassword(target.value)}/>
-        <button type="submit">Log In</button>
+    <form onSubmit={handleLogin} className="">
+      <div className="text-center text-3xl mt-4">
+        Log in to CalPlanner
+      </div>
+      <div className="mt-8 m-auto rounded-md pt-4 flex flex-col bg-berkeley-blue w-4/12" >
+        <input className="bg-gray-200 focus:bg-white border-4 p-3 m-2 w-7/12 m-auto" type="text" value={username} placeholder="Enter your username" name="Username" onChange={({ target }) => setUsername(target.value)}/>
+        <input className="bg-gray-200 focus:bg-white border-4 p-3 m-2 w-7/12 m-auto mt-4" type="password" value={password} placeholder="Enter your password" name="Password" onChange={({ target }) => setPassword(target.value)}/>
+        <button className="bg-green-500 hover:bg-green-600 text-white p-3 m-2 w-7/12 m-auto mt-4" type="submit">Log In</button>
       </div>
     </form>
   )
