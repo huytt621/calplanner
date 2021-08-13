@@ -32,10 +32,18 @@ const LoginForm = ({ setUser }) => {
       <div className="text-center text-3xl mt-4">
         Log in to CalPlanner
       </div>
-      <div className="mt-8 m-auto rounded-md pt-4 flex flex-col bg-berkeley-blue w-4/12" >
-        <input className="bg-gray-200 focus:bg-white border-4 p-3 m-2 w-7/12 m-auto" type="text" value={username} placeholder="Enter your username" name="Username" onChange={({ target }) => setUsername(target.value)}/>
-        <input className="bg-gray-200 focus:bg-white border-4 p-3 m-2 w-7/12 m-auto mt-4" type="password" value={password} placeholder="Enter your password" name="Password" onChange={({ target }) => setPassword(target.value)}/>
-        <button className="bg-green-500 hover:bg-green-600 text-white p-3 m-2 w-7/12 m-auto mt-4" type="submit">Log In</button>
+      <div className="mt-8 m-auto rounded-md pt-4 flex flex-col bg-berkeley-blue w-72" >
+        <input className="rounded-md bg-gray-200 focus:bg-white border-4 p-3 m-2 w-9/12 m-auto" type="text" value={username} placeholder="Enter your username" name="Username" onChange={({ target }) => setUsername(target.value)}/>
+        <input className="rounded-md bg-gray-200 focus:bg-white border-4 p-3 m-2 w-9/12 m-auto mt-4" type="password" value={password} placeholder="Enter your password" name="Password" onChange={({ target }) => setPassword(target.value)}/>
+        <button className="font-bold rounded-md bg-green-500 hover:bg-green-600 text-white p-3 m-2 w-9/12 m-auto mt-4 mb-4" type="submit">Log In</button>
+      </div>
+      <div className="text-center text-white mt-4 m-auto rounded-md pt-2 flex flex-col bg-berkeley-blue w-72 pb-2" >
+        <div>
+          New to CalPlanner?
+        </div>
+        <div className="hover:underline font-bold">
+          Register here.
+        </div>
       </div>
     </form>
   )
