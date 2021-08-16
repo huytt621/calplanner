@@ -1,7 +1,7 @@
 import EditableCell from './EditableCell'
-import Session from './Session'
+import EditableSession from './EditableSession'
 
-const Year = ({ year, yearIndex, plan, editPlan }) => {
+const EditableYear = ({ year, yearIndex, plan, editPlan }) => {
   const columns = [
     {
       Header: 'Course Name',
@@ -25,9 +25,9 @@ const Year = ({ year, yearIndex, plan, editPlan }) => {
     <div className="flex flex-row">
       <div>Year {yearIndex + 1}</div>
       <button onClick={deleteYear}>Delete</button>
-      {year.map((session, index) => <Session key={`y${yearIndex}s${index}`} columns={[{ Header: session.name, columns: columns }]} data={session.courses} year={yearIndex} sessionIndex={index} plan={plan} editPlan={editPlan} />)}
+      {year.map((session, index) => <EditableSession key={`y${yearIndex}s${index}`} columns={[{ Header: session.name, columns: columns }]} data={session.courses} year={yearIndex} sessionIndex={index} plan={plan} editPlan={editPlan} />)}
     </div>
   )
 }
 
-export default Year
+export default EditableYear

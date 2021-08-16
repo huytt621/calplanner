@@ -1,8 +1,8 @@
-import Year from './Year'
+import EditableYear from './EditableYear'
 import EditableText from './EditableText'
 import { useEffect, useState } from 'react'
 
-const Plan = ({ plan, editPlan }) => {
+const EditablePlan = ({ plan, editPlan }) => {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
 
@@ -32,7 +32,7 @@ const Plan = ({ plan, editPlan }) => {
   return (
     <div className="flex flex-col">
       <div>
-        {plan.years.map((year, index) => <Year key={`${index}`} year={year} yearIndex={index} plan={plan} editPlan={editPlan} />)}
+        {plan.years.map((year, index) => <EditableYear key={`${index}`} year={year} yearIndex={index} plan={plan} editPlan={editPlan} />)}
       </div>
       <button onClick={addYear}>Add New Year</button>
       <EditableText text={name} placeholder="Name of Plan">
@@ -45,4 +45,4 @@ const Plan = ({ plan, editPlan }) => {
   )
 }
 
-export default Plan
+export default EditablePlan

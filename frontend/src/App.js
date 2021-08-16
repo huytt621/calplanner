@@ -12,7 +12,7 @@ import RegisterForm from './components/RegisterForm'
 import Home from './components/Home'
 import Profile from './components/Profile'
 import PlansView from './components/PlansView'
-import Plan from './components/Plan'
+import EditablePlan from './components/EditablePlan'
 import './index.css'
 
 const App = () => {
@@ -61,7 +61,7 @@ const App = () => {
       <NavBar user={user} />
       <Switch>
         <Route path="/plans/:id">
-          {!plan ? <div></div> : <Plan plan={plan} editPlan={editPlan} />}
+          {!plan ? <div></div> : <EditablePlan plan={plan} editPlan={editPlan} />}
         </Route>
         <Route path="/plans">
           <PlansView plans={plans} />

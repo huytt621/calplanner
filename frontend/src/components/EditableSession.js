@@ -1,6 +1,6 @@
 import { useTable } from 'react-table'
 
-const Session = ({ columns, data, year, sessionIndex, plan, editPlan }) => {
+const EditableSession = ({ columns, data, year, sessionIndex, editPlan }) => {
 
   const updateMyData = (rowIndex, columnId, value) => {
     editPlan((newPlan) => {
@@ -79,4 +79,4 @@ const Session = ({ columns, data, year, sessionIndex, plan, editPlan }) => {
   )
 }
 
-export default Session
+export default EditableSession
