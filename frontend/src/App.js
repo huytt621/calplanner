@@ -13,12 +13,17 @@ import Home from './components/Home'
 import Profile from './components/Profile'
 import PlansView from './components/PlansView'
 import EditablePlan from './components/EditablePlan'
+import { useSelector, useDispatch } from "react-redux"
 import './index.css'
+import { initializePlans, editPlan } from "./reducers/planReducer"
 
 const App = () => {
+
+  const dispatch = useDispatch()
+  const plans = useSelector(state => state)
+
   const [user, setUser] = useState(null)
   const [plan, setPlan] = useState(null)
-  const [plans, setPlans] = useState([])
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedPlanappUser')
@@ -32,17 +37,13 @@ const App = () => {
   }, [])
 
   useEffect(() => {
-    planService
-      .getAll()
-      .then(plans => setPlans(plans))
+    dispatch(initializePlans())
   }, [])
 
-  const editPlan = action => {
+  const changePlan = async action => {
     const newPlan = {...plan}
     action(newPlan)
-    planService
-      .update(newPlan.id, newPlan)
-    setPlans(plans.map(p => p.id !== newPlan.id ? p : newPlan))
+    dispatch(editPlan(newPlan.id, newPlan))
   }
 
   const match = useRouteMatch('/plans/:id')
@@ -61,7 +62,7 @@ const App = () => {
       <NavBar user={user} />
       <Switch>
         <Route path="/plans/:id">
-          {!plan ? <div></div> : <EditablePlan plan={plan} editPlan={editPlan} />}
+          {!plan ? <div></div> : <EditablePlan plan={plan} editPlan={changePlan} />}
         </Route>
         <Route path="/plans">
           <PlansView plans={plans} />

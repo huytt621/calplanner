@@ -17,11 +17,11 @@ const NavBar = ({ user }) => {
           <li className="p-2 bg-berkeley-blue hover:bg-blue-800">
             <Link to="/register">Register</Link>
           </li>
+          {user &&
           <li className="p-2 mr-4 bg-berkeley-blue hover:bg-blue-800">
-            {user 
-              ? <Link to={`/users/${user.id}`}>{user.username}</Link>
-              : <div></div>}
+            <Link to={`/users/${user.id}`}>{user.username}</Link>
           </li>
+          }
         </div>
       </ul>
     </nav>
