@@ -1,12 +1,16 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router'
+import { useDispatch } from 'redux'
+import { initializeUser } from '../reducers/userReducer'
 import loginService from '../services/login'
 import planService from '../services/plans'
 
-const LoginForm = ({ setUser }) => {
+const LoginForm = () => {
+  const dispatch = useDispatch()
+  const history = useHistory()
+
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const history = useHistory()
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -20,7 +24,7 @@ const LoginForm = ({ setUser }) => {
       planService.setToken(user.token)
       setUsername('')
       setPassword('')
-      setUser(user)
+      dispatch(initializeUser(user.id))
       history.push('/')
     } catch (exception) {
       console.log(exception);

@@ -4,7 +4,6 @@ import {
   useRouteMatch
 } from "react-router-dom" 
 import { useState, useEffect } from 'react'
-import userService from './services/user'
 import planService from './services/plans'
 import NavBar from './components/NavBar'
 import LoginForm from './components/LoginForm'
@@ -16,13 +15,14 @@ import EditablePlan from './components/EditablePlan'
 import { useSelector, useDispatch } from "react-redux"
 import './index.css'
 import { initializePlans, editPlan } from "./reducers/planReducer"
+import { initializeUser } from "./reducers/userReducer"
 
 const App = () => {
 
   const dispatch = useDispatch()
-  const plans = useSelector(state => state)
+  const plans = useSelector(state => state.plans)
+  const user = useSelector(state => state.user)
 
-  const [user, setUser] = useState(null)
   const [plan, setPlan] = useState(null)
 
   useEffect(() => {
@@ -30,15 +30,13 @@ const App = () => {
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       planService.setToken(user.token)
-      userService
-        .get(user.id)
-        .then(user => setUser(user))
+      dispatch(initializeUser(user.id))
     }
-  }, [])
+  }, [dispatch])
 
   useEffect(() => {
     dispatch(initializePlans())
-  }, [])
+  }, [dispatch])
 
   const changePlan = async action => {
     const newPlan = {...plan}
@@ -68,10 +66,10 @@ const App = () => {
           <PlansView plans={plans} />
         </Route>
         <Route path="/login">
-          <LoginForm setUser={setUser} />
+          <LoginForm />
         </Route>
         <Route path="/register">
-          <RegisterForm setUser={setUser} />
+          <RegisterForm />
         </Route>
         <Route path="/users/:id">
           <Profile user={user} />

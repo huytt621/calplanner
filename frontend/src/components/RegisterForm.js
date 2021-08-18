@@ -1,12 +1,15 @@
-import userService from '../services/user'
 import { useState } from 'react'
 import { useHistory } from 'react-router'
+import { useDispatch } from 'react-redux'
+import { createUser } from '../reducers/userReducer'
 
-const RegisterForm = ({ setUser }) => {
+const RegisterForm = () => {
+  const dispatch = useDispatch()
+  const history = useHistory()
+
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-  const history = useHistory()
 
   const handleRegister = async (event) => {
     event.preventDefault()
@@ -16,13 +19,12 @@ const RegisterForm = ({ setUser }) => {
       return
     }
     try {
-      const user = await userService.create({
+      dispatch(createUser({
         username, password
-      })
+      }))
       setUsername('')
       setPassword('')
       setConfirmPassword('')
-      setUser(user)
       history.push('/')
     } catch (exception) {
       console.log(exception);
