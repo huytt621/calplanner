@@ -3,7 +3,7 @@ import {
   Route,
   useRouteMatch
 } from "react-router-dom" 
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import planService from './services/plans'
 import NavBar from './components/NavBar'
 import LoginForm from './components/LoginForm'
@@ -16,14 +16,14 @@ import { useSelector, useDispatch } from "react-redux"
 import './index.css'
 import { initializePlans, editPlan } from "./reducers/planReducer"
 import { initializeUser } from "./reducers/userReducer"
+import { setCurrentPlan } from "./reducers/currentPlanReducer"
 
 const App = () => {
 
   const dispatch = useDispatch()
   const plans = useSelector(state => state.plans)
+  const plan = useSelector(state => state.currentPlan)
   const user = useSelector(state => state.user)
-
-  const [plan, setPlan] = useState(null)
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedPlanappUser')
@@ -42,17 +42,12 @@ const App = () => {
     const newPlan = {...plan}
     action(newPlan)
     dispatch(editPlan(newPlan.id, newPlan))
+    dispatch(setCurrentPlan(newPlan.id))
   }
 
   const match = useRouteMatch('/plans/:id')
   if (!plan && match) {
-    if (plans.length > 0) {
-      setPlan(plans.find(p => p.id === match.params.id))
-    } else {
-      planService
-        .get(match.params.id)
-        .then(p => setPlan(p))
-    }
+    dispatch(setCurrentPlan(match.params.id))
   }
 
   return (

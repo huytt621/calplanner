@@ -12,10 +12,11 @@ export const initializePlans = () => {
 
 export const editPlan = (id, newPlan) => {
   return async dispatch => {
+    const plan = await planService.update(id, newPlan)
     dispatch({
       type: 'EDIT_PLAN',
       id: id,
-      data: newPlan
+      data: plan
     })
   }
 }
