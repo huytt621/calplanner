@@ -1,8 +1,8 @@
 import userService from '../services/user'
 
-export const initializeUser = async id => {
-  const user = await userService.get(id)
+export const initializeUser = id => {
   return async dispatch => {
+    const user = await userService.get(id)
     dispatch({
       type: 'NEW_USER',
       data: user
@@ -10,9 +10,9 @@ export const initializeUser = async id => {
   }
 }
 
-export const createUser = async newUser => {
-  const user = await userService.create(newUser)
+export const createUser = newUser => {
   return async dispatch => {
+    const user = await userService.create(newUser)
     dispatch({
       type: 'NEW_USER',
       data: user

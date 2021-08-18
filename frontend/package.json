@@ -47,6 +47,7 @@
     "autoprefixer": "^9.8.6",
     "json-server": "^0.16.3",
     "postcss": "^7.0.36",
+    "redux-devtools-extension": "^2.13.9",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.4"
   }
 }

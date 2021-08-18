@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router'
-import { useDispatch } from 'redux'
+import { useDispatch } from 'react-redux'
 import { initializeUser } from '../reducers/userReducer'
 import loginService from '../services/login'
 import planService from '../services/plans'
