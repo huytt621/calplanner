@@ -1,18 +1,22 @@
 import EditableYear from './EditableYear'
-import EditableText from './EditableText'
-import { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { editPlan, setCurrentPlan } from '../reducers/planReducer'
 
-const EditablePlan = ({ plan, editPlan }) => {
-  const [name, setName] = useState('')
-  const [description, setDescription] = useState('')
+const EditablePlan = () => {
 
-  useEffect(() => {
-    setName(plan.name)
-    setDescription(plan.description)
-  }, [plan])
+  const dispatch = useDispatch()
+
+  const plan = useSelector(state => state.currentPlan)
+
+  const changePlan = async action => {
+    const newPlan = {...plan}
+    action(newPlan)
+    dispatch(editPlan(plan.id, newPlan))
+    dispatch(setCurrentPlan(newPlan.id))
+  }
 
   const addYear = () => {
-    editPlan((newPlan) => {
+    changePlan(newPlan => {
       const newYear = []
       for (let i = 0; i < plan.numSessionsPerYear; i += 1) {
         newYear.push({ name: `Session ${i + 1}`, courses: [] })
@@ -21,26 +25,13 @@ const EditablePlan = ({ plan, editPlan }) => {
     })
   }
 
-  const saveName = () => {
-    editPlan(newPlan => newPlan.name = name)
-  }
-
-  const saveDescription = () => {
-    editPlan(newPlan => newPlan.description = description)
-  }
-
   return (
     <div className="flex flex-col">
       <div>
-        {plan.years.map((year, index) => <EditableYear key={`${index}`} year={year} yearIndex={index} plan={plan} editPlan={editPlan} />)}
+        {plan.years.map((year, index) => <EditableYear key={`${index}`} year={year} yearIndex={index} plan={plan} editPlan={changePlan} />)}
       </div>
       <button onClick={addYear}>Add New Year</button>
-      <EditableText text={name} placeholder="Name of Plan">
-        <input type="text" name="name" value={name} onChange={e => setName(e.target.value)} onBlur={saveName} placeholder="Name of Plan"></input>
-      </EditableText>
-      <EditableText text={description} placeholder="Description">
-        <textarea type="text" name="description" value={description} onChange={e => setDescription(e.target.value)} onBlur={saveDescription} placeholder="Description"></textarea>
-      </EditableText>
+      <div>{plan.name}</div>
     </div>
   )
 }

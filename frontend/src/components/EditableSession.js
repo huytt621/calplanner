@@ -25,7 +25,6 @@ const EditableSession = ({ columns, data, year, sessionIndex, editPlan }) => {
     })
   }
   
-
   const {
     getTableProps,
     getTableBodyProps,
