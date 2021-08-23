@@ -4,6 +4,8 @@ import {
   useRouteMatch
 } from "react-router-dom" 
 import { useEffect } from 'react'
+import { useSelector, useDispatch } from "react-redux"
+import './index.css'
 import planService from './services/plans'
 import NavBar from './components/NavBar'
 import LoginForm from './components/LoginForm'
@@ -12,8 +14,6 @@ import Home from './components/Home'
 import Profile from './components/Profile'
 import EditablePlan from './components/EditablePlan'
 import AllPlans from "./components/AllPlans"
-import { useSelector, useDispatch } from "react-redux"
-import './index.css'
 import { initializeUser } from "./reducers/userReducer"
 import { setCurrentPlan } from "./reducers/currentPlanReducer"
 import { editPlan } from "./reducers/planReducer"
