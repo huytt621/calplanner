@@ -17,6 +17,7 @@ import AllPlans from "./components/AllPlans"
 import { initializeUser } from "./reducers/userReducer"
 import { setCurrentPlan } from "./reducers/currentPlanReducer"
 import { editPlan } from "./reducers/planReducer"
+import CreatePlanForm from "./components/CreatePlanForm"
 
 const App = () => {
 
@@ -49,6 +50,9 @@ const App = () => {
     <div className="App font-sans flex flex-col">
       <NavBar user={user} />
       <Switch>
+        <Route path="/plans/new">
+          <CreatePlanForm />
+        </Route>
         <Route path="/plans/:id">
           {!plan ? <div></div> : <EditablePlan plan={plan} editPlan={changePlan} />}
         </Route>

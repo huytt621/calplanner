@@ -20,6 +20,7 @@ const EditablePlan = () => {
     changePlan(newPlan => {
       const newYear = []
       for (let i = 0; i < plan.numSessionsPerYear; i += 1) {
+        console.log('test');
         newYear.push({ name: `Session ${i + 1}`, courses: [] })
       }
       newPlan.years.push(newYear)
