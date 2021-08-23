@@ -1,6 +1,7 @@
 import EditableYear from './EditableYear'
 import { useSelector, useDispatch } from 'react-redux'
-import { editPlan, setCurrentPlan } from '../reducers/planReducer'
+import { editPlan } from '../reducers/planReducer'
+import { setCurrentPlan } from '../reducers/currentPlanReducer'
 
 const EditablePlan = () => {
 
