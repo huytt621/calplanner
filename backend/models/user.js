@@ -1,13 +1,9 @@
 const mongoose = require('mongoose')
-const uniqueValidator = require('mongoose-unique-validator')
+const findOrCreate = require('mongoose-findorcreate')
 
 const userSchema = new mongoose.Schema({
-    username: {
-      type: String,
-      unique: true,
-      required: true
-    },
-    passwordHash: String,
+    username: String,
+    googleId: String,
     plans: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -16,14 +12,13 @@ const userSchema = new mongoose.Schema({
     ],
   })
 
-  userSchema.plugin(uniqueValidator)
+  userSchema.plugin(findOrCreate)
   
   userSchema.set('toJSON', {
     transform: (document, returnedObject) => {
       returnedObject.id = returnedObject._id.toString()
       delete returnedObject._id
       delete returnedObject.__v
-      delete returnedObject.passwordHash
     }
   })
   

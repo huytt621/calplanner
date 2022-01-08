@@ -6,6 +6,10 @@ loginRouter.get('/google', passport.authenticate('google', {
   scope: ['profile']
 }))
 
+loginRouter.get('/google/callback', passport.authenticate('google'), (request, response) => {
+
+})
+
 loginRouter.post('/', async (request, response) => {
   const body = request.body
 
