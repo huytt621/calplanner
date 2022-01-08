@@ -8,21 +8,23 @@ passport.use(
     clientID: config.GOOGLE_CLIENT_ID,
     clientSecret: config.GOOGLE_CLIENT_SECRET,
     callbackURL: '/auth/google/callback'
-  }, (accessToken, refreshToken, profile, cb) => {
-    User.findOrCreate({
+  }, async (accessToken, refreshToken, profile, done) => {
+    const user = await User.findOrCreate({
       username: profile.displayName,
       googleId: profile.id,
       plans: []
     }, (error, user) => {
-      return cb(error, user)
-    })
+      return done(error, user)
+    })  
   })
 )
 
 passport.serializeUser((user, done) => {
-  done(null, user)
+  done(null, user.id)
 })
 
-passport.deserializeUser((user, done) => {
-  done(null, user)
+passport.deserializeUser((id, done) => {
+  User.findById(id).then(user => {
+    done(null, user)
+  })
 })
