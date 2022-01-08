@@ -1,4 +1,3 @@
-/*
 const plansRouter = require('express').Router()
 const Plan = require('../models/plan')
 const middleware = require('../utils/middleware')
@@ -8,7 +7,7 @@ plansRouter.get('/', async (request, response) => {
   response.json(plans)
 })
 
-plansRouter.post('/', middleware.userExtractor, async (request, response) => {
+plansRouter.post('/', async (request, response) => {
   const body = request.body
 
   if (body === undefined) {
@@ -44,7 +43,7 @@ plansRouter.get('/:id', async (request, response) => {
   }
 })
 
-plansRouter.delete('/:id', middleware.userExtractor, async (request, response) => {
+plansRouter.delete('/:id', async (request, response) => {
   const plan = await Plan.findById(request.params.id)
   if (!plan) {
     response.status(404).end()
@@ -60,7 +59,7 @@ plansRouter.delete('/:id', middleware.userExtractor, async (request, response) =
   response.status(204).end()
 })
 
-plansRouter.put('/:id', middleware.userExtractor, async (request, response) => {
+plansRouter.put('/:id', async (request, response) => {
   const plan = await Plan.findById(request.params.id)
   if (!plan) {
     response.status(404).end()
@@ -80,4 +79,3 @@ plansRouter.put('/:id', middleware.userExtractor, async (request, response) => {
 })
 
 module.exports = plansRouter
-*/
