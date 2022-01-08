@@ -1,3 +1,4 @@
+/*
 const plansRouter = require('express').Router()
 const Plan = require('../models/plan')
 const middleware = require('../utils/middleware')
@@ -79,3 +80,4 @@ plansRouter.put('/:id', middleware.userExtractor, async (request, response) => {
 })
 
 module.exports = plansRouter
+*/
