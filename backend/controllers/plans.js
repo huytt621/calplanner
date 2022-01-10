@@ -1,13 +1,13 @@
+const passport = require('passport')
 const plansRouter = require('express').Router()
 const Plan = require('../models/plan')
-const middleware = require('../utils/middleware')
 
 plansRouter.get('/', async (request, response) => {
   const plans = await Plan.find({})
   response.json(plans)
 })
 
-plansRouter.post('/', async (request, response) => {
+plansRouter.post('/', passport.authenticate('google'), async (request, response) => {
   const body = request.body
 
   if (body === undefined) {
@@ -16,7 +16,7 @@ plansRouter.post('/', async (request, response) => {
 
   const user = request.user
 
-  if (user === null) {
+  if (user === null || user === undefined) {
     return response.status(400).json({ error: 'user not found' })
   }
 
@@ -48,7 +48,8 @@ plansRouter.delete('/:id', async (request, response) => {
   if (!plan) {
     response.status(404).end()
   }
-  if (!request.token || plan.user.toString() !== request.user._id.toString()) {
+
+  if (!plan.user.toString() !== request.user._id.toString()) {
     return response.status(400).json({ error: 'token missing or invalid user' })
   }
   const user = request.user
@@ -64,7 +65,7 @@ plansRouter.put('/:id', async (request, response) => {
   if (!plan) {
     response.status(404).end()
   }
-  if (!request.token || plan.user.toString() !== request.user._id.toString()) {
+  if (!plan.user.toString() !== request.user._id.toString()) {
     return response.status(400).json({ error: 'token missing or invalid user' })
   }
   const body = request.body

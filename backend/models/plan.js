@@ -1,13 +1,22 @@
 const mongoose = require('mongoose')
 
+const courseSchema = new mongoose.Schema({
+  name: String,
+  units: Number,
+})
+
+courseSchema.set('toJSON', {
+    transform: (document, returnedObject) => {
+      delete returnedObject._id
+      delete returnedObject.__v
+    }
+})
+
 const sessionSchema = new mongoose.Schema({
   name: String,
-  numSessionsPerYear: Number,
-  description: String,
   courses: [
     {
-      name: String,
-      units: Number
+      type: courseSchema
     }
   ],
 })
@@ -15,9 +24,7 @@ const sessionSchema = new mongoose.Schema({
 sessionSchema.set('toJSON', {
     transform: (document, returnedObject) => {
       delete returnedObject._id
-      returnedObject.courses.forEach(course => {
-        delete course._id
-      })
+      delete returnedObject.__v
     }
 })
 
