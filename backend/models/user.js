@@ -2,8 +2,15 @@ const mongoose = require('mongoose')
 const findOrCreate = require('mongoose-findorcreate')
 
 const userSchema = new mongoose.Schema({
-  username: String,
-  googleId: String,
+  username: {
+    type: 'String',
+    required: true,
+  },
+  googleId: {
+    type: 'String',
+    required: true,
+    unique: true,
+  }
   plans: [
     {
       type: mongoose.Schema.Types.ObjectId,
