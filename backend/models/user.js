@@ -9,8 +9,8 @@ const userSchema = new mongoose.Schema({
   },
   googleId: {
     type: 'String',
-    required: true,
     unique: true,
+    required: true,
   },
   plans: [
     {
@@ -20,8 +20,8 @@ const userSchema = new mongoose.Schema({
   ],
 })
 
-userSchema.plugin(uniqueValidator)
 userSchema.plugin(findOrCreate)
+userSchema.plugin(uniqueValidator)
 
 userSchema.set('toJSON', {
   transform: (document, returnedObject) => {
