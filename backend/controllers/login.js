@@ -17,14 +17,18 @@ loginRouter.get(
 )
 
 loginRouter.get('/authenticated', (request, response) => {
+  const authenticated = typeof request.user !== 'undefined'
+
   const user = request.user
-  if (!user) {
-    response.status(200).json({
-      authenticated: false,
-    })
-  } else {
-    response.status(200).json(user)
-  }
+  response.status(200).json({
+    authenticated,
+    user
+  })
+})
+
+loginRouter.get('/logout', (request, response) => {
+  request.logout()
+  response.redirect('/')
 })
 
 module.exports = loginRouter
