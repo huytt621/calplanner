@@ -11,7 +11,11 @@ usersRouter.get('/', async (request, response) => {
 })
 
 usersRouter.get('/:id', async (request, response) => {
-  const user = await User.findById(request.params.id)
+  const user = await User.findById(request.params.id).populate('plans', {
+    years: 1,
+    date: 1,
+    name: 1,
+  })
   response.json(user)
 })
 
