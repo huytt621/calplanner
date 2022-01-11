@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const findOrCreate = require('mongoose-findorcreate')
+const uniqueValidator = require('mongoose-unique-validator')
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -19,6 +20,7 @@ const userSchema = new mongoose.Schema({
   ],
 })
 
+userSchema.plugin(uniqueValidator)
 userSchema.plugin(findOrCreate)
 
 userSchema.set('toJSON', {
