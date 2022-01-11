@@ -1,4 +1,3 @@
-const passport = require('passport')
 const plansRouter = require('express').Router()
 const Plan = require('../models/plan')
 
@@ -7,16 +6,16 @@ plansRouter.get('/', async (request, response) => {
   response.json(plans)
 })
 
-plansRouter.post('/', passport.authenticate('google'), async (request, response) => {
+plansRouter.post('/', async (request, response) => {
   const body = request.body
 
-  if (body === undefined) {
+  if (!body) {
     return response.status(400).json({ error: 'content missing' })
   }
 
   const user = request.user
 
-  if (user === null || user === undefined) {
+  if (!user) {
     return response.status(400).json({ error: 'user not found' })
   }
 
@@ -24,7 +23,7 @@ plansRouter.post('/', passport.authenticate('google'), async (request, response)
     name: body.name,
     years: body.years,
     date: new Date(),
-    user: user._id
+    user: user._id,
   })
 
   const savedPlan = await plan.save()
@@ -49,11 +48,13 @@ plansRouter.delete('/:id', async (request, response) => {
     response.status(404).end()
   }
 
-  if (!plan.user.toString() !== request.user._id.toString()) {
+  const user = request.user
+
+  if (!user || !plan.user.toString() !== user._id.toString()) {
     return response.status(400).json({ error: 'token missing or invalid user' })
   }
-  const user = request.user
-  user.plans = user.plans.filter(p => p.toString() === request.params.id)
+
+  user.plans = user.plans.filter((p) => p.toString() === request.params.id)
   await Plan.findByIdAndRemove(request.params.id)
   await user.save()
 
@@ -65,17 +66,19 @@ plansRouter.put('/:id', async (request, response) => {
   if (!plan) {
     response.status(404).end()
   }
-  if (!plan.user.toString() !== request.user._id.toString()) {
+  if (!request.user || !plan.user.toString() !== request.user._id.toString()) {
     return response.status(400).json({ error: 'token missing or invalid user' })
   }
   const body = request.body
 
   const newPlan = {
     ...body,
-    date: new Date()
+    date: new Date(),
   }
 
-  const updatedPlan = await Plan.findByIdAndUpdate(request.params.id, newPlan, { new: true })
+  const updatedPlan = await Plan.findByIdAndUpdate(request.params.id, newPlan, {
+    new: true,
+  })
   response.json(updatedPlan)
 })
 
