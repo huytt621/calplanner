@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import authService from './services/auth'
 import Navbar from './components/Navbar'
+import SessionView from './components/SessionView'
 
 const App = () => {
   const [user, setUser] = useState(null)
@@ -18,6 +19,7 @@ const App = () => {
   return (
     <>
       <Navbar user={user} setUser={setUser} />
+      <SessionView />
     </>
   )
 }
