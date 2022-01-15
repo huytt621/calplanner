@@ -13,11 +13,11 @@ plansRouter.post('/', async (request, response) => {
     return response.status(400).json({ error: 'content missing' })
   }
 
-  const user = request.user
-
-  if (!user) {
+  if (!request.isAuthenticated()) {
     return response.status(400).json({ error: 'user not found' })
   }
+
+  const user = request.user
 
   const plan = new Plan({
     name: body.name,
@@ -48,11 +48,14 @@ plansRouter.delete('/:id', async (request, response) => {
     response.status(404).end()
   }
 
-  const user = request.user
-
-  if (!user || !plan.user.toString() !== user._id.toString()) {
-    return response.status(400).json({ error: 'token missing or invalid user' })
+  if (!request.isAuthenticated()) {
+    return response.status(404).json({ error: 'unauthorized' })
   }
+  if (!plan.user.toString() === request.user._id.toString()) {
+    return response.status(400).json({ error: 'invalid user' })
+  }
+
+  const user = request.user
 
   user.plans = user.plans.filter((p) => p.toString() === request.params.id)
   await Plan.findByIdAndRemove(request.params.id)
@@ -64,10 +67,13 @@ plansRouter.delete('/:id', async (request, response) => {
 plansRouter.put('/:id', async (request, response) => {
   const plan = await Plan.findById(request.params.id)
   if (!plan) {
-    response.status(404).end()
+    return response.status(404).end()
   }
-  if (!request.user || !plan.user.toString() !== request.user._id.toString()) {
-    return response.status(400).json({ error: 'token missing or invalid user' })
+  if (!request.isAuthenticated()) {
+    return response.status(404).json({ error: 'unauthorized' })
+  }
+  if (!plan.user.toString() === request.user._id.toString()) {
+    return response.status(400).json({ error: 'invalid user' })
   }
   const body = request.body
 

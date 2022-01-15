@@ -1,25 +1,28 @@
 import React, { useState, useEffect } from 'react'
+import { useResource } from './hooks/resource'
 import authService from './services/auth'
 import Navbar from './components/Navbar'
-import SessionView from './components/SessionView'
+import PlanView from './components/PlanView'
 
 const App = () => {
   const [user, setUser] = useState(null)
+  const [plan, setPlan] = useState(null)
+  const planService = useResource('http://localhost:3001/api/plans')
 
   useEffect(() => {
-    authService.getUser().then((response) => {
-      if (response.authenticated) {
-        setUser(response.user)
-      } else {
-        setUser(null)
-      }
+    authService.getUser().then((returnedUser) => setUser(returnedUser))
+  }, [])
+
+  useEffect(() => {
+    planService.get('61dbcee8be6273e0da98c796').then((returnedPlan) => {
+      setPlan(returnedPlan)
     })
-  }, [user])
+  }, [])
 
   return (
     <>
       <Navbar user={user} setUser={setUser} />
-      <SessionView />
+      {plan !== null ? <PlanView plan={plan} setPlan={setPlan} /> : <div></div>}
     </>
   )
 }

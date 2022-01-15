@@ -1,7 +1,8 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
+import { useResource } from '../hooks/resource'
 import Table from './Table'
 
-const SessionView = () => {
+const SessionView = ({ session, sessionId, year, updatePlan }) => {
   const columns = useMemo(
     () => [
       {
@@ -16,16 +17,7 @@ const SessionView = () => {
     []
   )
 
-  const [data, setData] = useState(() => [
-    {
-      name: 'CS 61A',
-      units: '4',
-    },
-    {
-      name: 'CS 61B',
-      units: '4',
-    },
-  ])
+  const [data, setData] = useState(() => session.courses)
 
   const [skipPageReset, setSkipPageReset] = useState(false)
 
@@ -44,8 +36,9 @@ const SessionView = () => {
     )
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     setSkipPageReset(false)
+    updatePlan(data, year, sessionId)
   }, [data])
 
   return (

@@ -1,11 +1,7 @@
 import axios from 'axios'
-const baseUrl = '/auth'
 
 const getUser = async () => {
-  const response = await axios.get(`${baseUrl}/authenticated`)
-  return response.data
+  return await axios.get('/auth/user')
 }
 
-export default {
-  getUser,
-}
+export default { getUser }

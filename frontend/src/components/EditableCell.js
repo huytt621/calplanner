@@ -8,17 +8,17 @@ const EditableCell = ({
 }) => {
   const [value, setValue] = useState(initialValue)
 
+  const onChange = (e) => setValue(e.target.value)
+
+  const onBlur = () => {
+    updateData(index, id, value)
+  }
+
   useEffect(() => {
     setValue(initialValue)
   }, [initialValue])
 
-  return (
-    <input
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
-      onBlur={() => updateData(index, id, value)}
-    />
-  )
+  return <input value={value} onChange={onChange} onBlur={onBlur} />
 }
 
 export default EditableCell

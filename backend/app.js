@@ -15,7 +15,8 @@ const mongoose = require('mongoose')
 
 logger.info('connecting to', config.MONGODB_URI)
 
-mongoose.connect(config.MONGODB_URI)
+mongoose
+  .connect(config.MONGODB_URI)
   .then(() => {
     logger.info('connected to MongoDB')
   })
@@ -26,7 +27,12 @@ mongoose.connect(config.MONGODB_URI)
 app.use(express.static('build'))
 app.use(cors())
 app.use(express.json())
-app.use(cookieSession({ maxAge: 30 * 24 * 60 * 60 * 1000, keys: [config.SECRET] }))
+app.use(
+  cookieSession({
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+    keys: [config.SECRET],
+  })
+)
 app.use(passport.initialize())
 app.use(passport.session())
 
@@ -38,5 +44,3 @@ app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
 
 module.exports = app
-
-

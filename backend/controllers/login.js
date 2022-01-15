@@ -16,14 +16,12 @@ loginRouter.get(
   }
 )
 
-loginRouter.get('/authenticated', (request, response) => {
-  const authenticated = typeof request.user !== 'undefined'
-
-  const user = request.user
-  response.status(200).json({
-    authenticated,
-    user
-  })
+loginRouter.get('/user', (request, response) => {
+  if (!request.isAuthenticated()) {
+    response.status(404).json({ authenticated: false })
+  } else {
+    response.status(200).json(request.user)
+  }
 })
 
 loginRouter.get('/logout', (request, response) => {
