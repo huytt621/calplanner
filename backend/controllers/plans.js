@@ -51,7 +51,7 @@ plansRouter.delete('/:id', async (request, response) => {
   if (!request.isAuthenticated()) {
     return response.status(404).json({ error: 'unauthorized' })
   }
-  if (!plan.user.toString() === request.user._id.toString()) {
+  if (plan.user.toString() !== request.user._id.toString()) {
     return response.status(400).json({ error: 'invalid user' })
   }
 
@@ -72,7 +72,7 @@ plansRouter.put('/:id', async (request, response) => {
   if (!request.isAuthenticated()) {
     return response.status(404).json({ error: 'unauthorized' })
   }
-  if (!plan.user.toString() === request.user._id.toString()) {
+  if (plan.user.toString() !== request.user._id.toString()) {
     return response.status(400).json({ error: 'invalid user' })
   }
   const body = request.body
