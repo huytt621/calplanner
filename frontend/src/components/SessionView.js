@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { useResource } from '../hooks/resource'
 import Table from './Table'
 
 const SessionView = ({ session, sessionId, year, updatePlan }) => {

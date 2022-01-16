@@ -9,6 +9,14 @@ const App = () => {
   const [plan, setPlan] = useState(null)
   const planService = useResource('http://localhost:3001/api/plans')
 
+  const updatePlan = (courses, year, session) => {
+    const newPlan = { ...plan }
+    const newSession = newPlan.years[year].find((s) => s.id === session)
+    newSession.courses = courses
+    setPlan(newPlan)
+    planService.update(plan.id, newPlan)
+  }
+
   useEffect(() => {
     authService.getUser().then((returnedUser) => setUser(returnedUser))
   }, [])
@@ -22,7 +30,11 @@ const App = () => {
   return (
     <>
       <Navbar user={user} setUser={setUser} />
-      {plan !== null ? <PlanView plan={plan} setPlan={setPlan} /> : <div></div>}
+      {plan !== null ? (
+        <PlanView plan={plan} updatePlan={updatePlan} />
+      ) : (
+        <div></div>
+      )}
     </>
   )
 }
