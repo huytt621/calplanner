@@ -20,7 +20,9 @@ const Table = ({ columns, data, updateData, skipPageReset }) => {
 
   return (
     <>
-      <table {...getTableProps()}>
+      <table {...getTableProps()} className='table-fixed'>
+        <col width='2px' />
+        <col width='20px' />
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>

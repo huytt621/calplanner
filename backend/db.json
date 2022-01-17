@@ -57,7 +57,54 @@
           }
         ]
       }
+    ],
+    [
+      {
+        "name": "Fall 2021",
+        "courses": [
+          {
+            "name": "CS 70",
+            "units": "4"
+          },
+          {
+            "name": "CS W186",
+            "units": "4"
+          },
+          {
+            "name": "MUSIC 29",
+            "units": "4"
+          },
+          {
+            "name": "UGBA 135",
+            "units": "2"
+          }
+        ]
+      },
+      {
+        "name": "Spring 2022",
+        "courses": [
+          {
+            "name": "CS 170",
+            "units": "4"
+          },
+          {
+            "name": "DATA 100",
+            "units": "4"
+          },
+          {
+            "name": "ASTRO C10",
+            "units": "4"
+          },
+          {
+            "name": "GLOBAL C10A",
+            "units": "4"
+          }
+        ]
+      },
+      {
+        "name": "Summer 2023",
+        "courses": []
+      }
     ]
   ]
 }
-    

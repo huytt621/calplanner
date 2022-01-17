@@ -3,6 +3,7 @@ import { useResource } from './hooks/resource'
 import authService from './services/auth'
 import Navbar from './components/Navbar'
 import PlanView from './components/PlanView'
+import Hero from './components/Hero'
 
 const App = () => {
   const [user, setUser] = useState(null)
@@ -30,11 +31,12 @@ const App = () => {
   return (
     <>
       <Navbar user={user} setUser={setUser} />
-      {plan !== null ? (
+      <Hero />
+      {/* {plan !== null ? (
         <PlanView plan={plan} updatePlan={updatePlan} />
       ) : (
         <div></div>
-      )}
+      )} */}
     </>
   )
 }

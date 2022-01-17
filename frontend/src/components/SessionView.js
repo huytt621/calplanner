@@ -5,12 +5,17 @@ const SessionView = ({ session, sessionId, year, updatePlan }) => {
   const columns = useMemo(
     () => [
       {
-        Header: 'Course Name',
-        accessor: 'name',
-      },
-      {
-        Header: 'Units',
-        accessor: 'units',
+        Header: session.name,
+        columns: [
+          {
+            Header: 'Course Name',
+            accessor: 'name',
+          },
+          {
+            Header: 'Units',
+            accessor: 'units',
+          },
+        ],
       },
     ],
     []
