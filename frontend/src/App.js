@@ -29,7 +29,7 @@ const App = () => {
   }, [])
 
   return (
-    <>
+    <div className='relative'>
       <Navbar user={user} setUser={setUser} />
       <Hero />
       {/* {plan !== null ? (
@@ -37,7 +37,7 @@ const App = () => {
       ) : (
         <div></div>
       )} */}
-    </>
+    </div>
   )
 }
 

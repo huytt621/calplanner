@@ -3,7 +3,7 @@ import './Hero.css'
 
 const Hero = () => {
   return (
-    <div className='h-96 hero text-white flex items-center'>
+    <div className='z-0 h-96 hero text-white flex items-center absolute w-full top-16'>
       <div className='m-10'>
         <h1 className='font-normal text-5xl'>Build Your Future.</h1>
         <h2 className='font-light text-lg my-4'>

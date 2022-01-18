@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const Navbar = ({ user, setUser }) => {
@@ -7,7 +7,7 @@ const Navbar = ({ user, setUser }) => {
   const toggleMenu = () => setShowMenu(!showMenu)
 
   return (
-    <nav className='bg-gray-200'>
+    <nav className='bg-gray-200 absolute h-16 w-full z-40'>
       <div className='max-w mx-5'>
         <div className='flex justify-between items-center'>
           <Link to='/' className='flex'>
@@ -72,7 +72,7 @@ const Navbar = ({ user, setUser }) => {
           </div>
         </div>
       </div>
-      <div className={showMenu ? 'block' : 'hidden'}>
+      <div className={showMenu ? 'block bg-gray-200' : 'hidden'}>
         <div className='flex flex-col'>
           <Link to='/' className='p-5 hover:bg-gray-300'>
             Hello
